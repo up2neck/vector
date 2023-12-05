@@ -82,7 +82,6 @@ pub mod http;
 pub mod kafka;
 #[allow(unreachable_pub)]
 pub mod kubernetes;
-pub mod line_agg;
 pub mod list;
 #[cfg(any(feature = "sources-nats", feature = "sinks-nats"))]
 pub(crate) mod nats;

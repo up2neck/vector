@@ -41,9 +41,9 @@ pub mod heroku_logs;
 #[cfg(feature = "sources-host_metrics")]
 pub mod host_metrics;
 #[cfg(feature = "sources-http_client")]
-pub mod http_client;
-#[cfg(feature = "sources-http_server")]
-pub mod http_server;
+pub use sources_http_client;
+// #[cfg(feature = "sources-http_server")]
+// pub mod http_server;
 #[cfg(feature = "sources-internal_logs")]
 pub mod internal_logs;
 #[cfg(feature = "sources-internal_metrics")]
@@ -84,7 +84,7 @@ pub mod syslog;
 #[cfg(feature = "sources-vector")]
 pub mod vector;
 
-pub mod util;
+// pub mod util;
 
 pub use vector_lib::source::Source;
 

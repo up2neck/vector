@@ -1,0 +1,70 @@
+[package]
+name = "sources-utils"
+version = "0.1.0"
+authors = ["Vector Contributors <vector@datadoghq.com>"]
+edition = "2021"
+publish = false
+
+[dependencies]
+pin-project = { version = "1.1.3", default-features = false }
+
+# Internal libs
+vector-lib = { path = "../../../lib/vector-lib", default-features = false, features = ["vrl"] }
+
+async-trait = { version = "0.1.74", default-features = false }
+futures = { version = "0.3.29", default-features = false, features = ["compat", "io-compat"], package = "futures" }
+tokio = { version = "1.34.0", default-features = false, features = ["full"] }
+tokio-stream = { version = "0.1.14", default-features = false, features = ["net", "sync", "time"] }
+tokio-util = { version = "0.7", default-features = false, features = ["io", "time"] }
+
+# Tracing
+tracing = { version = "0.1.34", default-features = false }
+
+# Tower
+tower = { version = "0.4.13", default-features = false, features = ["buffer", "limit", "retry", "timeout", "util", "balance", "discover"] }
+tower-http = { version = "0.4.4", default-features = false, features = ["decompression-gzip", "trace"]}
+# Serde
+serde = { version = "1.0.193", default-features = false, features = ["derive"] }
+serde_with = { version = "3.4.0", default-features = false, features = ["macros", "std"] }
+bytes = { version = "1.5.0", default-features = false, features = ["serde"] }
+bytesize = { version = "1.3.0", default-features = false }
+chrono = { version = "0.4.31", default-features = false, features = ["serde"] }
+encoding_rs = { version = "0.8.33", default-features = false, features = ["serde", "alloc"] }
+flate2 = { version = "1.0.28", default-features = false, features = ["default"] }
+futures-util = { version = "0.3.29", default-features = false }
+headers = { version = "0.3.9", default-features = false }
+http = { version = "0.2.9", default-features = false }
+hyper = { version = "0.14.27", default-features = false, features = ["client", "runtime", "http1", "http2", "server", "stream"] }
+listenfd = { version = "1.0.1", default-features = false, optional = true }
+regex = { version = "1.10.2", default-features = false, features = ["std", "perf"] }
+smallvec = { version = "1", default-features = false, features = ["union", "serde"] }
+snafu = { version = "0.7.5", default-features = false }
+snap = { version = "1.1.0", default-features = false }
+socket2 = { version = "0.5.5", default-features = false }
+toml = { version = "0.8.8", default-features = false, features = ["parse", "display"] }
+tonic = { version = "0.10", optional = true, default-features = false, features = ["transport", "codegen", "prost", "tls", "tls-roots", "gzip"] }
+url = { version = "2.5.0", default-features = false, features = ["serde"] }
+warp = { version = "0.3.6", default-features = false }
+zstd = { version = "0.13.0", default-features = false }
+
+[features]
+sources-http_server = []
+sources-dnstap = []
+sources-vector = []
+sources-opentelemetry = []
+sources-utils-http-auth = []
+sources-utils-http-encoding = []
+sources-utils-http-error = []
+sources-utils-http-prelude = []
+sources-utils-http-query = []
+sources-aws_sqs = []
+sources-gcp_pubsub = []
+sources-utils-net-tcp = []
+sources-utils-net-udp = []
+sources-utils-net-unix = []
+sources-socket = []
+sources-file = []
+sources-prometheus-scrape = []
+sources-prometheus-remote-write = []
+sources-datadog_agent = []
+sources-statsd = []

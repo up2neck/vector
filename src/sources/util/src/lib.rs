@@ -87,3 +87,5 @@ pub fn extract_tag_key_and_value<S: AsRef<str>>(
         None => (tag_chunk.to_string(), TagValue::Bare),
     }
 }
+
+pub mod line_agg;

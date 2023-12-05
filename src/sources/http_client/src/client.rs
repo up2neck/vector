@@ -14,19 +14,20 @@ use crate::{
     codecs::{Decoder, DecodingConfig},
     config::{SourceConfig, SourceContext},
     http::Auth,
-    register_validatable_component,
+    // register_validatable_component,
     serde::{default_decoding, default_framing_message_based},
-    sources,
-    sources::util::{
-        http::HttpMethod,
-        http_client::{
-            build_url, call, default_interval, default_timeout, warn_if_interval_too_low,
-            GenericHttpClientInputs, HttpClientBuilder,
-        },
-    },
-    tls::{TlsConfig, TlsSettings},
+    //sources,
     Result,
 };
+
+use sources_utils::{
+    http::HttpMethod,
+    http_client::{
+        build_url, call, default_interval, default_timeout, warn_if_interval_too_low,
+        GenericHttpClientInputs, HttpClientBuilder,
+    },
+};
+
 use crate::{components::validation::*, sources::util::http_client};
 use vector_lib::codecs::{
     decoding::{DeserializerConfig, FramingConfig},
@@ -36,6 +37,7 @@ use vector_lib::configurable::configurable_component;
 use vector_lib::{
     config::{log_schema, LogNamespace, SourceOutput},
     event::Event,
+    tls::{TlsConfig, TlsSettings},
 };
 
 /// Configuration for the `http_client` source.
