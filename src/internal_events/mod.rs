@@ -106,7 +106,6 @@ mod pulsar;
 mod redis;
 #[cfg(feature = "transforms-reduce")]
 mod reduce;
-mod remap;
 mod sample;
 #[cfg(feature = "sinks-sematext")]
 mod sematext_metrics;
@@ -239,8 +238,6 @@ pub(crate) use self::pulsar::*;
 pub(crate) use self::redis::*;
 #[cfg(feature = "transforms-reduce")]
 pub(crate) use self::reduce::*;
-#[cfg(feature = "transforms-remap")]
-pub(crate) use self::remap::*;
 #[cfg(feature = "transforms-sample")]
 pub(crate) use self::sample::*;
 #[cfg(feature = "sinks-sematext")]

@@ -8,12 +8,13 @@ use std::{
 
 use snafu::{ResultExt, Snafu};
 use vector_lib::codecs::MetricTagValues;
-use vector_lib::compile_vrl;
 use vector_lib::config::LogNamespace;
 use vector_lib::configurable::configurable_component;
 use vector_lib::lookup::{metadata_path, owned_value_path, PathPrefix};
 use vector_lib::schema::Definition;
-use vector_lib::TimeZone;
+use vector_lib::transform::{SyncTransform, Transform, TransformOutputsBuf};
+use vector_lib::{compile_vrl, impl_generate_config_from_default};
+use vector_lib::{emit, TimeZone};
 use vector_vrl_functions::set_semantic_meaning::MeaningList;
 use vrl::compiler::runtime::{Runtime, Terminate};
 use vrl::compiler::state::ExternalEnv;
@@ -23,18 +24,15 @@ use vrl::path;
 use vrl::path::ValuePath;
 use vrl::value::{Kind, Value};
 
-use crate::config::OutputId;
-use crate::{
-    config::{
-        log_schema, ComponentKey, DataType, Input, TransformConfig, TransformContext,
-        TransformOutput,
-    },
+use vector_lib::config::OutputId;
+use vector_lib::{
+    config::{log_schema, ComponentKey, DataType, Input, TransformOutput},
     event::{Event, TargetEvents, VrlTarget},
-    internal_events::{RemapMappingAbort, RemapMappingError},
-    schema,
-    transforms::{SyncTransform, Transform, TransformOutputsBuf},
-    Result,
+    schema, Result,
 };
+
+use crate::config::transforms::{TransformConfig, TransformContext};
+use crate::internal_events::{RemapMappingAbort, RemapMappingError};
 
 const DROPPED: &str = "dropped";
 
@@ -99,7 +97,7 @@ pub struct RemapConfig {
     ///
     /// Additionally, dropped events can potentially be diverted to a specially named output for
     /// further logging and analysis by setting `reroute_dropped`.
-    #[serde(default = "crate::serde::default_false")]
+    #[serde(default = "serde_util::default_false")]
     #[configurable(metadata(docs::human_name = "Drop Event on Error"))]
     pub drop_on_error: bool,
 
@@ -115,7 +113,7 @@ pub struct RemapConfig {
     /// further logging and analysis by setting `reroute_dropped`.
     ///
     /// [vrl_docs_abort]: https://vector.dev/docs/reference/vrl/expressions/#abort
-    #[serde(default = "crate::serde::default_true")]
+    #[serde(default = "serde_util::default_true")]
     #[configurable(metadata(docs::human_name = "Drop Event on Abort"))]
     pub drop_on_abort: bool,
 
@@ -128,7 +126,7 @@ pub struct RemapConfig {
     /// In these cases, `reroute_dropped` can be set to `true` which forwards the original event
     /// to a specially-named output, `dropped`. The original event is annotated with additional
     /// fields describing why the event was dropped.
-    #[serde(default = "crate::serde::default_false")]
+    #[serde(default = "serde_util::default_false")]
     #[configurable(metadata(docs::human_name = "Reroute Dropped Events"))]
     pub reroute_dropped: bool,
 

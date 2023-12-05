@@ -21,7 +21,7 @@ pub mod metric_to_log;
 #[cfg(feature = "transforms-reduce")]
 pub mod reduce;
 #[cfg(feature = "transforms-remap")]
-pub mod remap;
+pub use transforms_remap;
 #[cfg(feature = "transforms-route")]
 pub mod route;
 #[cfg(feature = "transforms-sample")]

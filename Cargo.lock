@@ -2241,6 +2241,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "config-lib"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "dyn-clone",
+ "serde",
+ "typetag",
+ "vector-lib",
+]
+
+[[package]]
 name = "confy"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -8062,6 +8073,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde-util"
+version = "0.1.0"
+dependencies = [
+ "bytes 1.5.0",
+ "bytesize",
+ "indexmap 2.1.0",
+ "serde",
+ "serde_json",
+ "vector-lib",
+]
+
+[[package]]
 name = "serde-value"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9572,6 +9595,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "transforms-remap"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "config-lib",
+ "derivative",
+ "inventory",
+ "metrics",
+ "serde",
+ "serde-util",
+ "serde_json",
+ "snafu",
+ "toml 0.8.8",
+ "tracing 0.1.40",
+ "typetag",
+ "vector-lib",
+ "vector-vrl-functions",
+ "vrl",
+]
+
+[[package]]
 name = "treediff"
 version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -10005,6 +10049,7 @@ dependencies = [
  "cidr-utils 0.6.1",
  "clap 4.4.10",
  "colored",
+ "config-lib",
  "console-subscriber",
  "criterion",
  "crossterm",
@@ -10097,6 +10142,7 @@ dependencies = [
  "semver 1.0.20",
  "serde",
  "serde-toml-merge",
+ "serde-util",
  "serde_bytes",
  "serde_json",
  "serde_with 3.4.0",
@@ -10133,6 +10179,7 @@ dependencies = [
  "tracing-limit",
  "tracing-subscriber",
  "tracing-tower",
+ "transforms-remap",
  "typetag",
  "url",
  "uuid",

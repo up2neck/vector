@@ -1,0 +1,14 @@
+[package]
+name = "config-lib"
+version = "0.1.0"
+authors = ["Vector Contributors <vector@datadoghq.com>"]
+edition = "2021"
+publish = false
+
+[dependencies]
+vector-lib = { path = "../../lib/vector-lib", default-features = false, features = ["vrl"] }
+
+async-trait = { version = "0.1.74", default-features = false }
+serde = { version = "1.0.193", default-features = false, features = ["derive"] }
+dyn-clone = { version = "1.0.16", default-features = false }
+typetag = { version = "0.2.13", default-features = false }
