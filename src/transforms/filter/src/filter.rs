@@ -2,17 +2,18 @@ use vector_lib::config::{clone_input_definitions, LogNamespace};
 use vector_lib::configurable::configurable_component;
 use vector_lib::internal_event::{Count, InternalEventHandle as _, Registered};
 
-use crate::{
-    conditions::{AnyCondition, Condition},
-    config::{
-        DataType, GenerateConfig, Input, OutputId, TransformConfig, TransformContext,
-        TransformOutput,
-    },
+use vector_lib::{
+    config::{DataType, Input, TransformOutput},
     event::Event,
-    internal_events::FilterEventsDropped,
     schema,
-    transforms::{FunctionTransform, OutputBuffer, Transform},
 };
+
+use super::internal_events::*;
+use crate::config::transforms::{TransformConfig, TransformContext};
+use conditions_lib::{AnyCondition, Condition};
+use vector_lib::config::OutputId;
+use vector_lib::transform::{FunctionTransform, OutputBuffer, Transform};
+use vector_lib::{impl_generate_config_from_default, register};
 
 /// Configuration for the `filter` transform.
 #[configurable_component(transform("filter", "Filter events based on a set of conditions."))]
@@ -31,12 +32,14 @@ impl From<AnyCondition> for FilterConfig {
         Self { condition }
     }
 }
-
-impl GenerateConfig for FilterConfig {
-    fn generate_config() -> toml::Value {
-        toml::from_str(r#"condition = ".message = \"value\"""#).unwrap()
+impl Default for FilterConfig {
+    fn default() -> Self {
+        Self {
+            condition: AnyCondition::String(".message = \"value\"".to_string()),
+        }
     }
 }
+impl_generate_config_from_default!(FilterConfig);
 
 #[async_trait::async_trait]
 #[typetag::serde(name = "filter")]

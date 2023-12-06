@@ -11,7 +11,7 @@ pub use transforms_aws_ec2_metadata;
 #[cfg(feature = "transforms-dedupe")]
 pub use transforms_dedupe;
 #[cfg(feature = "transforms-filter")]
-pub mod filter;
+pub use transforms_filter;
 #[cfg(feature = "transforms-log_to_metric")]
 pub mod log_to_metric;
 #[cfg(feature = "transforms-lua")]

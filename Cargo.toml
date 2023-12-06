@@ -121,11 +121,13 @@ members = [
   "src/config-lib",
   "src/serde-util",
   "src/http-util",
+  "src/conditions-lib",
   # transforms
   "src/transforms/remap",
   "src/transforms/aggregate",
   "src/transforms/aws_ec2_metadata",
   "src/transforms/dedupe",
+  "src/transforms/filter",
 ]
 
 [workspace.dependencies]
@@ -148,7 +150,9 @@ transforms-remap = { path = "src/transforms/remap", optional = true }
 transforms-aggregate = { path = "src/transforms/aggregate", optional = true }
 transforms-aws_ec2_metadata = { path = "src/transforms/aws_ec2_metadata", optional = true }
 transforms-dedupe = { path = "src/transforms/dedupe", optional = true }
+transforms-filter = { path = "src/transforms/filter", optional = true }
 config-lib = { path = "src/config-lib", optional = true }
+conditions-lib = { path = "src/conditions-lib", optional = true }
 http-util = { path = "src/http-util", optional = true }
 serde-util = { path = "src/serde-util", optional = true }
 
@@ -611,7 +615,7 @@ transforms-metrics = [
 transforms-aggregate = ["dep:transforms-aggregate", "dep:config-lib"]
 transforms-aws_ec2_metadata = ["dep:arc-swap", "dep:transforms-aws_ec2_metadata", "dep:config-lib", "dep:serde-util", "dep:http-util"]
 transforms-dedupe = ["dep:lru", "dep:transforms-dedupe", "dep:config-lib"]
-transforms-filter = []
+transforms-filter = ["dep:transforms-filter", "dep:config-lib"]
 transforms-log_to_metric = []
 transforms-lua = ["dep:mlua", "vector-lib/lua"]
 transforms-metric_to_log = []

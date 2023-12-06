@@ -180,8 +180,6 @@ pub(crate) use self::exec::*;
 pub(crate) use self::file::*;
 #[cfg(any(feature = "sources-file-descriptor", feature = "sources-stdin"))]
 pub(crate) use self::file_descriptor::*;
-#[cfg(feature = "transforms-filter")]
-pub(crate) use self::filter::*;
 #[cfg(feature = "sources-fluent")]
 pub(crate) use self::fluent::*;
 #[cfg(feature = "sources-gcp_pubsub")]
