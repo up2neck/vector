@@ -66,34 +66,34 @@ impl<T> TransformOuter<T>
 where
     T: Configurable + Serialize,
 {
-    pub(crate) fn new<I, IT>(inputs: I, inner: IT) -> Self
-    where
-        I: IntoIterator<Item = T>,
-        IT: Into<BoxedTransform>,
-    {
-        let inputs = Inputs::from_iter(inputs);
-        let inner = inner.into();
-        TransformOuter { inputs, inner }
-    }
+    // pub(crate) fn new<I, IT>(inputs: I, inner: IT) -> Self
+    // where
+    //     I: IntoIterator<Item = T>,
+    //     IT: Into<BoxedTransform>,
+    // {
+    //     let inputs = Inputs::from_iter(inputs);
+    //     let inner = inner.into();
+    //     TransformOuter { inputs, inner }
+    // }
 
-    pub(super) fn map_inputs<U>(self, f: impl Fn(&T) -> U) -> TransformOuter<U>
-    where
-        U: Configurable + Serialize,
-    {
-        let inputs = self.inputs.iter().map(f).collect::<Vec<_>>();
-        self.with_inputs(inputs)
-    }
+    // pub(super) fn map_inputs<U>(self, f: impl Fn(&T) -> U) -> TransformOuter<U>
+    // where
+    //     U: Configurable + Serialize,
+    // {
+    //     let inputs = self.inputs.iter().map(f).collect::<Vec<_>>();
+    //     self.with_inputs(inputs)
+    // }
 
-    pub(crate) fn with_inputs<I, U>(self, inputs: I) -> TransformOuter<U>
-    where
-        I: IntoIterator<Item = U>,
-        U: Configurable + Serialize,
-    {
-        TransformOuter {
-            inputs: Inputs::from_iter(inputs),
-            inner: self.inner,
-        }
-    }
+    // pub(crate) fn with_inputs<I, U>(self, inputs: I) -> TransformOuter<U>
+    // where
+    //     I: IntoIterator<Item = U>,
+    //     U: Configurable + Serialize,
+    // {
+    //     TransformOuter {
+    //         inputs: Inputs::from_iter(inputs),
+    //         inner: self.inner,
+    //     }
+    // }
 }
 
 #[derive(Debug)]
