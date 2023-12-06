@@ -9,13 +9,18 @@ use futures::{Stream, StreamExt};
 use vector_lib::config::LogNamespace;
 use vector_lib::configurable::configurable_component;
 
-use crate::{
-    config::{DataType, Input, OutputId, TransformConfig, TransformContext, TransformOutput},
+use vector_lib::{
+    config::{DataType, Input, TransformOutput},
     event::{metric, Event, EventMetadata},
-    internal_events::{AggregateEventRecorded, AggregateFlushed, AggregateUpdateFailed},
+    // internal_events::{AggregateEventRecorded, AggregateFlushed, AggregateUpdateFailed},
     schema,
-    transforms::{TaskTransform, Transform},
 };
+
+use super::internal_events::*;
+use crate::config::transforms::{TransformConfig, TransformContext};
+use vector_lib::config::OutputId;
+use vector_lib::transform::{TaskTransform, Transform};
+use vector_lib::{emit, impl_generate_config_from_default};
 
 /// Configuration for the `aggregate` transform.
 #[configurable_component(transform("aggregate", "Aggregate metrics passing through a topology."))]

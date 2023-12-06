@@ -5,7 +5,7 @@ use std::collections::HashSet;
 use snafu::Snafu;
 
 #[cfg(feature = "transforms-aggregate")]
-pub mod aggregate;
+pub use transforms_aggregate;
 #[cfg(feature = "transforms-aws_ec2_metadata")]
 pub mod aws_ec2_metadata;
 #[cfg(feature = "transforms-dedupe")]

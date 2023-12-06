@@ -136,8 +136,6 @@ mod windows;
 #[cfg(feature = "sources-mongodb_metrics")]
 pub(crate) use mongodb_metrics::*;
 
-#[cfg(feature = "transforms-aggregate")]
-pub(crate) use self::aggregate::*;
 #[cfg(feature = "sources-amqp")]
 pub(crate) use self::amqp::*;
 #[cfg(feature = "sources-apache_metrics")]

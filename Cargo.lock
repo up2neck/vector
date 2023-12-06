@@ -9595,6 +9595,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "transforms-aggregate"
+version = "0.1.0"
+dependencies = [
+ "async-stream",
+ "async-trait",
+ "config-lib",
+ "derivative",
+ "futures 0.3.29",
+ "inventory",
+ "metrics",
+ "serde",
+ "serde-util",
+ "serde_json",
+ "snafu",
+ "tokio",
+ "toml 0.8.8",
+ "tracing 0.1.40",
+ "typetag",
+ "vector-lib",
+ "vector-vrl-functions",
+ "vrl",
+]
+
+[[package]]
 name = "transforms-remap"
 version = "0.1.0"
 dependencies = [
@@ -10179,6 +10203,7 @@ dependencies = [
  "tracing-limit",
  "tracing-subscriber",
  "tracing-tower",
+ "transforms-aggregate",
  "transforms-remap",
  "typetag",
  "url",

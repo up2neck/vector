@@ -117,9 +117,10 @@ members = [
   "lib/vector-vrl/tests",
   "lib/vector-vrl/web-playground",
   "vdev",
-  "src/transforms/remap",
   "src/config-lib",
   "src/serde-util",
+  "src/transforms/remap",
+  "src/transforms/aggregate",
 ]
 
 [workspace.dependencies]
@@ -139,6 +140,7 @@ vector-lib = { path = "lib/vector-lib", default-features = false, features = ["v
 vector-vrl-functions = { path = "lib/vector-vrl/functions" }
 loki-logproto = { path = "lib/loki-logproto", optional = true }
 transforms-remap = { path = "src/transforms/remap", optional = true }
+transforms-aggregate = { path = "src/transforms/aggregate", optional = true }
 config-lib = { path = "src/config-lib", optional = true }
 serde-util = { path = "src/serde-util", optional = true }
 
@@ -598,7 +600,7 @@ transforms-metrics = [
   "transforms-throttle",
 ]
 
-transforms-aggregate = []
+transforms-aggregate = ["dep:transforms-aggregate", "dep:config-lib", "dep:serde-util"]
 transforms-aws_ec2_metadata = ["dep:arc-swap"]
 transforms-dedupe = ["dep:lru"]
 transforms-filter = []
