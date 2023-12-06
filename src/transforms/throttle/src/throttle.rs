@@ -5,18 +5,23 @@ use futures::{Stream, StreamExt};
 use governor::{clock, Quota, RateLimiter};
 use serde_with::serde_as;
 use snafu::Snafu;
-use vector_lib::config::{clone_input_definitions, LogNamespace};
+use vector_lib::config::{clone_input_definitions, LogNamespace, TransformOutput};
 use vector_lib::configurable::configurable_component;
 
-use crate::{
-    conditions::{AnyCondition, Condition},
-    config::{DataType, Input, OutputId, TransformConfig, TransformContext, TransformOutput},
+use vector_lib::{
+    config::{DataType, Input},
     event::Event,
-    internal_events::{TemplateRenderingError, ThrottleEventDiscarded},
     schema,
-    template::Template,
-    transforms::{TaskTransform, Transform},
+    // template::Template,
 };
+
+use super::internal_events::*;
+use crate::config::transforms::{TransformConfig, TransformContext};
+use conditions_lib::{AnyCondition, Condition};
+use template_lib::Template;
+use vector_lib::config::OutputId;
+use vector_lib::transform::{TaskTransform, Transform};
+use vector_lib::{emit, impl_generate_config_from_default};
 
 /// Configuration of internal metrics for the Throttle transform.
 #[configurable_component]

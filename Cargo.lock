@@ -9052,6 +9052,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "template-lib"
+version = "0.1.0"
+dependencies = [
+ "bytes 1.5.0",
+ "chrono",
+ "chrono-tz",
+ "once_cell",
+ "regex",
+ "serde",
+ "snafu",
+ "vector-lib",
+]
+
+[[package]]
 name = "term"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9901,6 +9915,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "transforms-throttle"
+version = "0.1.0"
+dependencies = [
+ "async-stream",
+ "async-trait",
+ "conditions-lib",
+ "config-lib",
+ "futures 0.3.29",
+ "governor",
+ "inventory",
+ "metrics",
+ "serde",
+ "serde_with 3.4.0",
+ "snafu",
+ "template-lib",
+ "tokio",
+ "toml 0.8.8",
+ "tracing 0.1.40",
+ "typetag",
+ "vector-lib",
+]
+
+[[package]]
 name = "treediff"
 version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -10445,6 +10482,7 @@ dependencies = [
  "strip-ansi-escapes",
  "syslog",
  "tempfile",
+ "template-lib",
  "test-generator",
  "tikv-jemallocator",
  "tokio",
@@ -10472,6 +10510,7 @@ dependencies = [
  "transforms-filter",
  "transforms-remap",
  "transforms-route",
+ "transforms-throttle",
  "typetag",
  "url",
  "uuid",
