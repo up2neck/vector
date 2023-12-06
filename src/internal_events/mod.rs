@@ -146,8 +146,6 @@ pub(crate) use self::api::*;
 pub(crate) use self::aws::*;
 #[cfg(feature = "sinks-aws_cloudwatch_logs")]
 pub(crate) use self::aws_cloudwatch_logs::*;
-// #[cfg(feature = "transforms-aws_ec2_metadata")]
-// pub(crate) use self::aws_ec2_metadata::*;
 #[cfg(feature = "sources-aws_ecs_metrics")]
 pub(crate) use self::aws_ecs_metrics::*;
 #[cfg(any(
@@ -164,8 +162,6 @@ pub(crate) use self::codecs::*;
 pub(crate) use self::datadog_metrics::*;
 #[cfg(feature = "sinks-datadog_traces")]
 pub(crate) use self::datadog_traces::*;
-#[cfg(feature = "transforms-dedupe")]
-pub(crate) use self::dedupe::*;
 #[cfg(feature = "sources-demo_logs")]
 pub(crate) use self::demo_logs::*;
 #[cfg(feature = "sources-dnstap")]

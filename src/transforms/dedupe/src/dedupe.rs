@@ -8,16 +8,16 @@ use vector_lib::configurable::configurable_component;
 use vector_lib::lookup::lookup_v2::ConfigTargetPath;
 use vrl::path::OwnedTargetPath;
 
-use crate::{
-    config::{
-        log_schema, DataType, GenerateConfig, Input, OutputId, TransformConfig, TransformContext,
-        TransformOutput,
-    },
+use vector_lib::{
+    config::{log_schema, DataType, Input, OutputId, TransformOutput},
     event::{Event, Value},
-    internal_events::DedupeEventsDropped,
     schema,
-    transforms::{TaskTransform, Transform},
 };
+
+use super::internal_events::*;
+use crate::config::transforms::{TransformConfig, TransformContext};
+use vector_lib::transform::{TaskTransform, Transform};
+use vector_lib::{emit, impl_generate_config_from_default};
 
 /// Options to control what fields to match against.
 ///
@@ -137,15 +137,15 @@ pub struct Dedupe {
     cache: LruCache<CacheEntry, bool>,
 }
 
-impl GenerateConfig for DedupeConfig {
-    fn generate_config() -> toml::Value {
-        toml::Value::try_from(Self {
+impl Default for DedupeConfig {
+    fn default() -> Self {
+        Self {
             fields: None,
             cache: default_cache_config(),
-        })
-        .unwrap()
+        }
     }
 }
+impl_generate_config_from_default!(DedupeConfig);
 
 #[async_trait::async_trait]
 #[typetag::serde(name = "dedupe")]

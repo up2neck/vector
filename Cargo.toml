@@ -125,6 +125,7 @@ members = [
   "src/transforms/remap",
   "src/transforms/aggregate",
   "src/transforms/aws_ec2_metadata",
+  "src/transforms/dedupe",
 ]
 
 [workspace.dependencies]
@@ -146,6 +147,7 @@ loki-logproto = { path = "lib/loki-logproto", optional = true }
 transforms-remap = { path = "src/transforms/remap", optional = true }
 transforms-aggregate = { path = "src/transforms/aggregate", optional = true }
 transforms-aws_ec2_metadata = { path = "src/transforms/aws_ec2_metadata", optional = true }
+transforms-dedupe = { path = "src/transforms/dedupe", optional = true }
 config-lib = { path = "src/config-lib", optional = true }
 http-util = { path = "src/http-util", optional = true }
 serde-util = { path = "src/serde-util", optional = true }
@@ -608,7 +610,7 @@ transforms-metrics = [
 
 transforms-aggregate = ["dep:transforms-aggregate", "dep:config-lib"]
 transforms-aws_ec2_metadata = ["dep:arc-swap", "dep:transforms-aws_ec2_metadata", "dep:config-lib", "dep:serde-util", "dep:http-util"]
-transforms-dedupe = ["dep:lru"]
+transforms-dedupe = ["dep:lru", "dep:transforms-dedupe", "dep:config-lib"]
 transforms-filter = []
 transforms-log_to_metric = []
 transforms-lua = ["dep:mlua", "vector-lib/lua"]
