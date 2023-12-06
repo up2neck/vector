@@ -11,15 +11,12 @@ vector-lib = { path = "../../../lib/vector-lib", default-features = false, featu
 config-lib = { path = "../../config-lib" }
 
 vrl = { git = "https://github.com/vectordotdev/vrl", rev = "37319dfca17dc5d7637b24455199029cc30eb128", features = ["arbitrary", "cli", "test", "test_framework"] }
-
-async-stream = { version = "0.3.5", default-features = false }
 async-trait = { version = "0.1.74", default-features = false }
 futures = { version = "0.3.29", default-features = false, features = ["compat", "io-compat"], package = "futures" }
-inventory = { version = "0.3.13", default-features = false }
-metrics = "0.21.1"
-serde = { version = "1.0.193", default-features = false, features = ["derive"] }
 typetag = { version = "0.2.13", default-features = false }
-toml = { version = "0.8.8", default-features = false, features = ["parse", "display"] }
 tokio = { version = "1.34.0", default-features = false, features = ["full"] }
 lru = { version = "0.12.1", default-features = false }
 bytes = { version = "1.5.0", default-features = false, features = ["serde"] }
+serde = { version = "1.0.193", default-features = false, features = ["derive"] }
+toml = { version = "0.8.8", default-features = false, features = ["parse", "display"] }
+inventory = { version = "0.3.13", default-features = false }
