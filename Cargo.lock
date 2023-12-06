@@ -4237,6 +4237,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "http-util"
+version = "0.1.0"
+dependencies = [
+ "futures 0.3.29",
+ "futures-util",
+ "headers",
+ "http 0.2.9",
+ "hyper",
+ "hyper-openssl",
+ "hyper-proxy",
+ "metrics",
+ "openssl",
+ "rand 0.8.5",
+ "serde",
+ "serde_with 3.4.0",
+ "snafu",
+ "tokio",
+ "tower",
+ "tower-http",
+ "tracing 0.1.40",
+ "vector-lib",
+]
+
+[[package]]
 name = "httparse"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9613,6 +9637,36 @@ dependencies = [
 ]
 
 [[package]]
+name = "transforms-aws_ec2_metadata"
+version = "0.1.0"
+dependencies = [
+ "arc-swap",
+ "async-stream",
+ "async-trait",
+ "bytes 1.5.0",
+ "config-lib",
+ "derivative",
+ "futures 0.3.29",
+ "http 0.2.9",
+ "http-util",
+ "hyper",
+ "inventory",
+ "metrics",
+ "once_cell",
+ "serde",
+ "serde-util",
+ "serde_json",
+ "serde_with 3.4.0",
+ "snafu",
+ "tokio",
+ "toml 0.8.8",
+ "tracing 0.1.40",
+ "typetag",
+ "vector-lib",
+ "vrl",
+]
+
+[[package]]
 name = "transforms-remap"
 version = "0.1.0"
 dependencies = [
@@ -10099,6 +10153,7 @@ dependencies = [
  "http 0.2.9",
  "http-body",
  "http-serde",
+ "http-util",
  "hyper",
  "hyper-openssl",
  "hyper-proxy",
@@ -10198,6 +10253,7 @@ dependencies = [
  "tracing-subscriber",
  "tracing-tower",
  "transforms-aggregate",
+ "transforms-aws_ec2_metadata",
  "transforms-remap",
  "typetag",
  "url",

@@ -19,15 +19,18 @@ use vector_lib::lookup::OwnedTargetPath;
 use vrl::value::kind::Collection;
 use vrl::value::Kind;
 
-use crate::config::OutputId;
-use crate::{
-    config::{DataType, Input, ProxyConfig, TransformConfig, TransformContext, TransformOutput},
+use vector_lib::{
+    config::{proxy::ProxyConfig, DataType, Input},
     event::Event,
-    http::HttpClient,
-    internal_events::{AwsEc2MetadataRefreshError, AwsEc2MetadataRefreshSuccessful},
     schema,
-    transforms::{TaskTransform, Transform},
 };
+
+use super::internal_events::*;
+use crate::config::transforms::{TransformConfig, TransformContext};
+use http_util::HttpClient;
+use vector_lib::config::{OutputId, TransformOutput};
+use vector_lib::transform::{TaskTransform, Transform};
+use vector_lib::{emit, impl_generate_config_from_default};
 
 const ACCOUNT_ID_KEY: &str = "account-id";
 const AMI_ID_KEY: &str = "ami-id";
@@ -125,7 +128,7 @@ pub struct Ec2Metadata {
     #[configurable(derived)]
     #[serde(
         default,
-        skip_serializing_if = "crate::serde::skip_serializing_if_default"
+        skip_serializing_if = "serde_util::skip_serializing_if_default"
     )]
     proxy: ProxyConfig,
 

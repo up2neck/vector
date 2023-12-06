@@ -117,10 +117,14 @@ members = [
   "lib/vector-vrl/tests",
   "lib/vector-vrl/web-playground",
   "vdev",
+  # hackathon
   "src/config-lib",
   "src/serde-util",
+  "src/http-util",
+  # transforms
   "src/transforms/remap",
   "src/transforms/aggregate",
+  "src/transforms/aws_ec2_metadata",
 ]
 
 [workspace.dependencies]
@@ -141,7 +145,9 @@ vector-vrl-functions = { path = "lib/vector-vrl/functions" }
 loki-logproto = { path = "lib/loki-logproto", optional = true }
 transforms-remap = { path = "src/transforms/remap", optional = true }
 transforms-aggregate = { path = "src/transforms/aggregate", optional = true }
+transforms-aws_ec2_metadata = { path = "src/transforms/aws_ec2_metadata", optional = true }
 config-lib = { path = "src/config-lib", optional = true }
+http-util = { path = "src/http-util", optional = true }
 serde-util = { path = "src/serde-util", optional = true }
 
 # Tokio / Futures
@@ -600,8 +606,8 @@ transforms-metrics = [
   "transforms-throttle",
 ]
 
-transforms-aggregate = ["dep:transforms-aggregate", "dep:config-lib", "dep:serde-util"]
-transforms-aws_ec2_metadata = ["dep:arc-swap"]
+transforms-aggregate = ["dep:transforms-aggregate", "dep:config-lib"]
+transforms-aws_ec2_metadata = ["dep:arc-swap", "dep:transforms-aws_ec2_metadata", "dep:config-lib", "dep:serde-util", "dep:http-util"]
 transforms-dedupe = ["dep:lru"]
 transforms-filter = []
 transforms-log_to_metric = []

@@ -12,7 +12,6 @@ use vector_lib::configurable::configurable_component;
 use vector_lib::{
     config::{DataType, Input, TransformOutput},
     event::{metric, Event, EventMetadata},
-    // internal_events::{AggregateEventRecorded, AggregateFlushed, AggregateUpdateFailed},
     schema,
 };
 
