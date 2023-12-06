@@ -1,0 +1,23 @@
+[package]
+name = "transforms-sample"
+version = "0.1.0"
+authors = ["Vector Contributors <vector@datadoghq.com>"]
+edition = "2021"
+publish = false
+
+[dependencies]
+# Internal libs
+vector-lib = { path = "../../../lib/vector-lib", default-features = false, features = ["vrl"] }
+config-lib = { path = "../../config-lib" }
+conditions-lib = { path = "../../conditions-lib" }
+vrl = { git = "https://github.com/vectordotdev/vrl", rev = "37319dfca17dc5d7637b24455199029cc30eb128", features = ["arbitrary", "cli", "test", "test_framework"] }
+# serde-util = { path = "../../serde-util" }
+
+async-trait = { version = "0.1.74", default-features = false }
+inventory = { version = "0.3.13", default-features = false }
+serde = { version = "1.0.193", default-features = false, features = ["derive"] }
+typetag = { version = "0.2.13", default-features = false }
+toml = { version = "0.8.8", default-features = false, features = ["parse", "display"] }
+tokio = { version = "1.34.0", default-features = false, features = ["full"] }
+indexmap = { version = "2.1.0", default-features = false, features = ["serde", "std"] }
+seahash = { version = "4.1.0", default-features = false }

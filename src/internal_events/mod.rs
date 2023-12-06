@@ -34,8 +34,6 @@ mod conditions;
 mod datadog_metrics;
 #[cfg(feature = "sinks-datadog_traces")]
 mod datadog_traces;
-#[cfg(feature = "transforms-dedupe")]
-mod dedupe;
 #[cfg(feature = "sources-demo_logs")]
 mod demo_logs;
 #[cfg(feature = "sources-dnstap")]
@@ -49,8 +47,6 @@ mod eventstoredb_metrics;
 mod exec;
 #[cfg(any(feature = "sources-file-descriptor", feature = "sources-stdin"))]
 mod file_descriptor;
-#[cfg(feature = "transforms-filter")]
-mod filter;
 #[cfg(feature = "sources-fluent")]
 mod fluent;
 #[cfg(feature = "sources-gcp_pubsub")]
@@ -106,7 +102,6 @@ mod pulsar;
 mod redis;
 #[cfg(feature = "transforms-reduce")]
 mod reduce;
-mod sample;
 #[cfg(feature = "sinks-sematext")]
 mod sematext_metrics;
 mod socket;
@@ -118,8 +113,6 @@ mod statsd_sink;
 mod tag_cardinality_limit;
 mod tcp;
 mod template;
-#[cfg(feature = "transforms-throttle")]
-mod throttle;
 mod udp;
 mod unix;
 #[cfg(feature = "sinks-websocket")]
@@ -230,8 +223,6 @@ pub(crate) use self::pulsar::*;
 pub(crate) use self::redis::*;
 #[cfg(feature = "transforms-reduce")]
 pub(crate) use self::reduce::*;
-#[cfg(feature = "transforms-sample")]
-pub(crate) use self::sample::*;
 #[cfg(feature = "sinks-sematext")]
 pub(crate) use self::sematext_metrics::*;
 #[cfg(any(feature = "sources-splunk_hec", feature = "sinks-splunk_hec"))]

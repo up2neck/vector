@@ -25,7 +25,7 @@ pub use transforms_remap;
 #[cfg(feature = "transforms-route")]
 pub use transforms_route;
 #[cfg(feature = "transforms-sample")]
-pub mod sample;
+pub use transforms_sample;
 #[cfg(feature = "transforms-tag_cardinality_limit")]
 pub mod tag_cardinality_limit;
 #[cfg(feature = "transforms-throttle")]

@@ -131,6 +131,7 @@ members = [
   "src/transforms/filter",
   "src/transforms/route",
   "src/transforms/throttle",
+  "src/transforms/sample",
 ]
 
 [workspace.dependencies]
@@ -155,7 +156,8 @@ transforms-aws_ec2_metadata = { path = "src/transforms/aws_ec2_metadata", option
 transforms-dedupe = { path = "src/transforms/dedupe", optional = true }
 transforms-filter = { path = "src/transforms/filter", optional = true }
 transforms-route = { path = "src/transforms/route", optional = true }
-transforms-throttle= { path = "src/transforms/throttle", optional = true }
+transforms-throttle = { path = "src/transforms/throttle", optional = true }
+transforms-sample = { path = "src/transforms/sample", optional = true }
 config-lib = { path = "src/config-lib", optional = true }
 conditions-lib = { path = "src/conditions-lib", optional = true }
 template-lib = { path = "src/template-lib", optional = true }
@@ -629,7 +631,7 @@ transforms-pipelines = ["transforms-filter", "transforms-route"]
 transforms-reduce = []
 transforms-remap = ["dep:transforms-remap", "dep:config-lib", "dep:serde-util"]
 transforms-route = ["dep:transforms-route", "dep:config-lib", "dep:serde-util", "dep:conditions-lib"]
-transforms-sample = []
+transforms-sample = ["dep:transforms-sample", "dep:config-lib", "dep:conditions-lib"]
 transforms-tag_cardinality_limit = ["dep:bloomy", "dep:hashbrown"]
 transforms-throttle = ["dep:governor", "dep:transforms-throttle", "dep:conditions-lib", "dep:config-lib", "dep:template-lib"]
 

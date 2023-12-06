@@ -1,19 +1,23 @@
-use vector_lib::config::{LegacyKey, LogNamespace};
+use vector_lib::config::{LegacyKey, LogNamespace, TransformOutput};
 use vector_lib::configurable::configurable_component;
 use vrl::value::Kind;
 use vrl::{event_path, owned_value_path};
 
-use crate::{
-    conditions::{AnyCondition, Condition},
-    config::{
-        DataType, GenerateConfig, Input, OutputId, TransformConfig, TransformContext,
-        TransformOutput,
-    },
+use vector_lib::{
+    // conditions::{AnyCondition, Condition},
+    config::{DataType, Input},
     event::Event,
-    internal_events::SampleEventDiscarded,
+    // internal_events::SampleEventDiscarded,
     schema,
-    transforms::{FunctionTransform, OutputBuffer, Transform},
+    // transforms::{FunctionTransform, OutputBuffer, Transform},
 };
+
+use crate::config::transforms::{TransformConfig, TransformContext};
+use crate::internal_events::*;
+use conditions_lib::{AnyCondition, Condition};
+use vector_lib::config::OutputId;
+use vector_lib::transform::{FunctionTransform, OutputBuffer, Transform};
+use vector_lib::{emit, impl_generate_config_from_default};
 
 /// Configuration for the `sample` transform.
 #[configurable_component(transform(
@@ -47,16 +51,16 @@ pub struct SampleConfig {
     pub exclude: Option<AnyCondition>,
 }
 
-impl GenerateConfig for SampleConfig {
-    fn generate_config() -> toml::Value {
-        toml::Value::try_from(Self {
+impl Default for SampleConfig {
+    fn default() -> Self {
+        Self {
             rate: 10,
             key_field: None,
             exclude: None::<AnyCondition>,
-        })
-        .unwrap()
+        }
     }
 }
+impl_generate_config_from_default!(SampleConfig);
 
 #[async_trait::async_trait]
 #[typetag::serde(name = "sample")]
