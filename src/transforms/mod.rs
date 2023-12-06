@@ -23,7 +23,7 @@ pub mod reduce;
 #[cfg(feature = "transforms-remap")]
 pub use transforms_remap;
 #[cfg(feature = "transforms-route")]
-pub mod route;
+pub use transforms_route;
 #[cfg(feature = "transforms-sample")]
 pub mod sample;
 #[cfg(feature = "transforms-tag_cardinality_limit")]

@@ -3,16 +3,17 @@ use vector_lib::config::{clone_input_definitions, LogNamespace};
 use vector_lib::configurable::configurable_component;
 use vector_lib::transform::SyncTransform;
 
-use crate::{
-    conditions::{AnyCondition, Condition},
-    config::{
-        DataType, GenerateConfig, Input, OutputId, TransformConfig, TransformContext,
-        TransformOutput,
-    },
+use vector_lib::{
+    config::{DataType, Input, TransformOutput},
     event::Event,
     schema,
-    transforms::Transform,
 };
+
+use crate::config::transforms::{TransformConfig, TransformContext};
+use conditions_lib::{AnyCondition, Condition};
+use vector_lib::config::OutputId;
+use vector_lib::impl_generate_config_from_default;
+use vector_lib::transform::Transform;
 
 pub(crate) const UNMATCHED_ROUTE: &str = "_unmatched";
 
@@ -69,7 +70,7 @@ pub struct RouteConfig {
     ///
     /// In these cases, `reroute_unmatched` can be set to `false` to disable the `<transform_name>._unmatched`
     /// output and instead silently discard any unmatched events.
-    #[serde(default = "crate::serde::default_true")]
+    #[serde(default = "serde_util::default_true")]
     #[configurable(metadata(docs::human_name = "Reroute Unmatched Events"))]
     reroute_unmatched: bool,
 
@@ -86,15 +87,15 @@ pub struct RouteConfig {
     route: IndexMap<String, AnyCondition>,
 }
 
-impl GenerateConfig for RouteConfig {
-    fn generate_config() -> toml::Value {
-        toml::Value::try_from(Self {
+impl Default for RouteConfig {
+    fn default() -> Self {
+        Self {
             reroute_unmatched: true,
             route: IndexMap::new(),
-        })
-        .unwrap()
+        }
     }
 }
+impl_generate_config_from_default!(RouteConfig);
 
 #[async_trait::async_trait]
 #[typetag::serde(name = "route")]

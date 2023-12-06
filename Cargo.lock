@@ -9884,6 +9884,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "transforms-route"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "conditions-lib",
+ "config-lib",
+ "indexmap 2.1.0",
+ "inventory",
+ "serde",
+ "serde-util",
+ "tokio",
+ "toml 0.8.8",
+ "typetag",
+ "vector-lib",
+]
+
+[[package]]
 name = "treediff"
 version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -10454,6 +10471,7 @@ dependencies = [
  "transforms-dedupe",
  "transforms-filter",
  "transforms-remap",
+ "transforms-route",
  "typetag",
  "url",
  "uuid",
