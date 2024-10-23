@@ -149,7 +149,7 @@ prost = { version = "0.12", default-features = false, features = ["std"] }
 prost-build = { version = "0.12", default-features = false }
 prost-reflect = { version = "0.14", features = ["serde"], default-features = false }
 prost-types = { version = "0.12", default-features = false }
-serde_json = { version = "1.0.128", default-features = false, features = ["raw_value", "std"] }
+serde_json = { version = "1.0.132", default-features = false, features = ["raw_value", "std"] }
 serde = { version = "1.0.210", default-features = false, features = ["alloc", "derive", "rc"] }
 toml = { version = "0.8.19", default-features = false, features = ["display", "parse"] }
 tonic = { version = "0.11", default-features = false, features = ["transport", "codegen", "prost", "tls", "tls-roots", "gzip"] }
@@ -282,7 +282,7 @@ axum = { version = "0.6.20", default-features = false }
 base64 = { version = "0.22.1", default-features = false, optional = true }
 bloomy = { version = "1.2.0", default-features = false, optional = true }
 bollard = { version = "0.16.1", default-features = false, features = ["ssl", "chrono"], optional = true }
-bytes = { version = "1.7.2", default-features = false, features = ["serde"] }
+bytes = { version = "1.8.0", default-features = false, features = ["serde"] }
 bytesize = { version = "1.3.0", default-features = false }
 chrono.workspace = true
 chrono-tz.workspace = true
@@ -958,7 +958,7 @@ transform-benches = ["transforms-filter", "transforms-dedupe", "transforms-reduc
 codecs-benches = []
 loki-benches = ["sinks-loki"]
 enrichment-tables-benches = ["enrichment-tables-geoip", "enrichment-tables-mmdb"]
-proptest = ["dep:proptest", "dep:proptest-derive"]
+proptest = ["dep:proptest", "dep:proptest-derive", "vrl/proptest"]
 
 [[bench]]
 name = "default"
