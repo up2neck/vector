@@ -49,6 +49,7 @@ pub trait RegisterInternalEvent: Sized {
 pub trait InternalEventHandle: Sized {
     type Data: Sized;
     fn emit(&self, data: Self::Data);
+    fn emit_zero_value(&self) {}
 }
 
 // Sets the name of an event if it doesn't have one
@@ -221,8 +222,12 @@ macro_rules! registered_event {
         fn emit(&$slf:ident, $data_name:ident: $data:ident)
             $emit_body:block
 
+        $(fn emit_zero_value(&$slf2:ident)
+            $emit_zero_value_body:block)?
+
         $(fn register($fixed_name:ident: $fixed_tags:ty, $tags_name:ident: $tags:ty)
             $register_body:block)?
+
     ) => {
         paste::paste!{
             #[derive(Clone)]
@@ -238,9 +243,11 @@ macro_rules! registered_event {
                 }
 
                 fn register($slf) -> Self::Handle {
-                    Self::Handle {
+                    let handle = Self::Handle {
                         $( $field: $value, )*
-                    }
+                    };
+                    handle.emit_zero_value();
+                    handle
                 }
             }
 
@@ -249,6 +256,9 @@ macro_rules! registered_event {
 
                 fn emit(&$slf, $data_name: $data)
                     $emit_body
+
+                $(fn emit_zero_value(&$slf2)
+                    $emit_zero_value_body)?
             }
 
             $(impl $crate::internal_event::cached_event::RegisterTaggedInternalEvent for $event {

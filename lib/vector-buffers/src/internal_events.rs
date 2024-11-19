@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use metrics::{counter, gauge, histogram, Histogram};
 use vector_common::{
-    internal_event::{error_type, InternalEvent},
+    internal_event::{error_type, InternalEvent, InternalEventHandle},
     registered_event,
 };
 

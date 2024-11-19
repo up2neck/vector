@@ -1,6 +1,7 @@
 use std::time::Duration;
 
 use metrics::{histogram, Histogram};
+use crate::vector_lib::internal_event::InternalEventHandle;
 
 #[derive(Clone, Copy)]
 pub struct AdaptiveConcurrencyLimitData {

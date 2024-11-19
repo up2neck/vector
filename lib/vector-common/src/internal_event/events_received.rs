@@ -1,7 +1,7 @@
 use metrics::{counter, histogram, Counter, Histogram};
 use tracing::trace;
 
-use super::CountByteSize;
+use super::{CountByteSize, InternalEventHandle};
 
 crate::registered_event!(
     EventsReceived => {
@@ -19,5 +19,10 @@ crate::registered_event!(
         self.events_count.record(count as f64);
         self.events.increment(count as u64);
         self.event_bytes.increment(byte_size.get() as u64);
+    }
+
+    fn emit_zero_value(&self) {
+        self.events.increment(0);
+        self.event_bytes.increment(0);
     }
 );

@@ -32,13 +32,15 @@ impl<'a, const INTENTIONAL: bool> RegisterInternalEvent
 {
     type Handle = DroppedHandle<'a, INTENTIONAL>;
     fn register(self) -> Self::Handle {
-        Self::Handle {
+        let handle = Self::Handle {
             discarded_events: counter!(
                 "component_discarded_events_total",
                 "intentional" => if INTENTIONAL { "true" } else { "false" },
             ),
             reason: self.reason,
-        }
+        };
+        handle.discarded_events.increment(0);
+        handle
     }
 }
 

@@ -5,7 +5,7 @@ use tracing::trace;
 
 use crate::config::ComponentKey;
 
-use super::{CountByteSize, OptionalTag, Output, SharedString};
+use super::{CountByteSize, OptionalTag, Output, SharedString, InternalEventHandle};
 
 pub const DEFAULT_OUTPUT: &str = "_default";
 
@@ -40,6 +40,11 @@ crate::registered_event!(
 
         self.events.increment(count as u64);
         self.event_bytes.increment(byte_size.get() as u64);
+    }
+
+    fn emit_zero_value(&self) {
+        self.events.increment(0);
+        self.event_bytes.increment(0);
     }
 );
 

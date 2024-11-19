@@ -1,4 +1,4 @@
-use vector_lib::internal_event::{ComponentEventsDropped, Count, Registered, INTENTIONAL};
+use vector_lib::internal_event::{ComponentEventsDropped, Count, Registered, InternalEventHandle, INTENTIONAL};
 
 vector_lib::registered_event! (
     FilterEventsDropped => {
