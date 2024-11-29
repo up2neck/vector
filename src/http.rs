@@ -503,11 +503,7 @@ pub fn build_proxy_connector(
 pub fn build_tls_connector(
     tls_settings: MaybeTlsSettings,
 ) -> Result<HttpsConnector<HttpConnector>, HttpError> {
-    let mut http = HttpConnector::new();
-    http.enforce_http(false);
-
-    let tls = tls_connector_builder(&tls_settings).context(BuildTlsConnectorSnafu)?;
-    let mut https = HttpsConnector::with_connector(http, tls).context(MakeHttpsConnectorSnafu)?;
+    let mut https = HttpsConnector::new().unwrap();
 
     let settings = tls_settings.tls().cloned();
     https.set_callback(move |c, _uri| {
